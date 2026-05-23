@@ -1,69 +1,56 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creativein STD - Digital Agency</title>
+    <title>Creativein STD - Digital Creative Market/title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* =========================================
-           CSS VARIABLES 
+           CSS VARIABLES - BLACK, WHITE & GLASS THEME
            ========================================= */
         :root {
-            --bg-body: #05050f;
-            --bg-body-rgb: 5, 5, 15;
-            --bg-hero: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #05050f 80%);
-            --bg-section: #0a0a16;
-            --bg-alt: #0f1021;
+            --bg-body: #000000;
+            --bg-body-rgb: 0, 0, 0;
             
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
+            --text-muted: #a1a1aa; /* Light Grey */
             
-            --primary-color: #4f46e5; 
-            --primary-hover: #6366f1;
-            --accent-color: #38bdf8;
+            --primary-color: #ffffff; /* Pure White */
+            --primary-text: #000000;  /* Pure Black for text on white elements */
             
+            /* Glassmorphism Settings */
             --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-
-            --card-bg: #111122;
-            --card-border: #1f1f3a;
-            --input-border: #333;
-        }
-
-        [data-theme="light"] {
-            --bg-body: #f8fafc;
-            --bg-body-rgb: 248, 250, 252;
-            --bg-hero: radial-gradient(circle at 50% 0%, #e0e7ff 0%, #f1f5f9 80%);
-            --bg-section: #ffffff;
-            --bg-alt: #f1f5f9;
-            
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(0, 0, 0, 0.05);
-            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
-
-            --card-bg: #ffffff;
-            --card-border: #e2e8f0;
-            --input-border: #cbd5e1;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(16px);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
         }
 
         /* =========================================
            BASE STYLES
            ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); overflow-x: hidden; transition: background-color 0.4s ease, color 0.4s ease; }
+        
+        body { 
+            background-color: var(--bg-body);
+            /* Ambient Light Effect di background hitam pekat */
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(255,255,255,0.08) 0%, transparent 60%),
+                radial-gradient(circle at -20% 80%, rgba(255,255,255,0.04) 0%, transparent 50%),
+                radial-gradient(circle at 120% 50%, rgba(255,255,255,0.03) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main); 
+            overflow-x: hidden; 
+        }
+
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         img { max-width: 100%; height: auto; border-radius: 16px; }
@@ -72,22 +59,23 @@
         
         .section-padding { padding: 100px 0; }
         .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
-        .section-header h2 { font-size: clamp(2rem, 3vw, 2.5rem); margin-bottom: 16px; font-weight: 800; }
-        .section-header p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; }
+        .section-header h2 { font-size: clamp(2rem, 3vw, 2.5rem); margin-bottom: 16px; font-weight: 800; letter-spacing: -0.5px;}
+        .section-header p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; font-weight: 300;}
 
-        /* Buttons & Badges */
+        /* Buttons & Badges - Monokrom */
         .badge {
-            background: rgba(79, 70, 229, 0.15); color: var(--primary-color); border: 1px solid rgba(79, 70, 229, 0.3);
-            padding: 8px 16px; border-radius: 30px; font-size: 0.875rem; font-weight: 600; display: inline-block; margin-bottom: 24px; backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05); color: var(--primary-color); border: 1px solid var(--glass-border);
+            padding: 8px 16px; border-radius: 30px; font-size: 0.875rem; font-weight: 500; display: inline-block; margin-bottom: 24px; backdrop-filter: var(--glass-blur);
+            letter-spacing: 1px; text-transform: uppercase;
         }
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; cursor: pointer; border: none; transition: 0.3s;
         }
-        .btn-primary { background-color: var(--primary-color); color: #fff; box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3); }
-        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-3px); box-shadow: 0 15px 25px rgba(79, 70, 229, 0.4);}
-        .btn-outline { background-color: transparent; border: 1px solid var(--primary-color); color: var(--text-main); }
-        .btn-outline:hover { background-color: rgba(79, 70, 229, 0.1); transform: translateY(-3px);}
+        .btn-primary { background-color: var(--primary-color); color: var(--primary-text); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15); }
+        .btn-primary:hover { background-color: #e5e5e5; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);}
+        .btn-outline { background-color: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--text-main); }
+        .btn-outline:hover { background-color: rgba(255, 255, 255, 0.1); border-color: #fff; transform: translateY(-3px);}
 
         /* =========================================
            SCROLL REVEAL ANIMATIONS
@@ -97,10 +85,7 @@
             will-change: transform, opacity;
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
-        }
+        .reveal.active { opacity: 1; transform: translate(0, 0) scale(1); }
         .fade-up { transform: translateY(50px); }
         .fade-down { transform: translateY(-50px); }
         .fade-left { transform: translateX(-50px); }
@@ -118,7 +103,7 @@
         @keyframes float-delay { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         /* =========================================
-           NAVBAR STICKY
+           NAVBAR STICKY - GLASS EFFECT
            ========================================= */
         nav { 
             padding: 24px 0; 
@@ -130,44 +115,51 @@
         }
         nav.scrolled {
             padding: 15px 0;
-            background: rgba(var(--bg-body-rgb), 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(var(--bg-body-rgb), 0.5);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
         }
 
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        
+        /* LOGO STYLES */
         .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px;}
-        .logo span { background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 6px; font-size: 1.1rem;}
+        .logo-img { height: 35px; width: auto; border-radius: 0; filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));}
+        .logo span { background: var(--primary-color); color: var(--primary-text); padding: 2px 8px; border-radius: 6px; font-size: 1.1rem;}
         
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: 0.3s; position: relative;}
         .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
         .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0;
             background-color: var(--primary-color); transition: width 0.3s ease;
         }
         .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
         
         .nav-actions { display: flex; align-items: center; gap: 16px; }
-        .theme-toggle { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; }
-        .theme-toggle:hover { transform: rotate(45deg); background: var(--primary-color); color: #fff;}
         .menu-btn { display: none; font-size: 1.5rem; background: none; border: none; color: var(--text-main); cursor: pointer; }
+
+        /* =========================================
+           GLOBAL GLASS CARDS (APPLIED EVERYWHERE)
+           ========================================= */
+        .glass-card, .f-card, .port-card, .price-card, .contact-form, .socials a {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--card-shadow);
+        }
 
         /* =========================================
            HERO SECTION
            ========================================= */
-        .hero { 
-            background: var(--bg-hero); 
-            padding: 160px 0 120px; 
-            text-align: center; position: relative; transition: 0.4s ease; 
-        }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
-        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto; }
+        .hero { padding: 180px 0 120px; text-align: center; position: relative; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -2px; }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); font-weight: 300; margin-bottom: 40px; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto; }
         
         .ui-preview { display: flex; justify-content: center; align-items: center; gap: 24px; margin-top: 80px; position: relative; z-index: 10; }
-        .glass-card { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 24px; text-align: left; box-shadow: var(--card-shadow); }
+        .glass-card { border-radius: 24px; padding: 24px; text-align: left; }
         
         .anim-float { animation: float 6s ease-in-out infinite; }
         .anim-float-delay { animation: float-delay 7s ease-in-out infinite; }
@@ -176,71 +168,73 @@
         .card-stat h4 { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
         .card-stat h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;}
         
-        .card-main { width: 380px; background: var(--card-bg); border: 1px solid var(--card-border); transform: translateY(-20px); }
-        .card-main img { width: 100%; height: 180px; object-fit: cover; margin-top: 15px; border-radius: 12px; transition: 0.5s;}
-        .card-main:hover img { transform: scale(1.05); }
+        .card-main { width: 380px; transform: translateY(-20px); }
+        .card-main img { width: 100%; height: 180px; object-fit: cover; margin-top: 15px; border-radius: 12px; transition: 0.5s; filter: grayscale(100%) contrast(1.2);}
+        .card-main:hover img { transform: scale(1.05); filter: grayscale(0%);}
         
-        .card-rating { width: 220px; background: linear-gradient(135deg, rgba(79,70,229,0.2), rgba(56,189,248,0.1)); }
-        .card-rating i { color: #fbbf24; font-size: 1.2rem; }
+        .card-rating { width: 220px; background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); }
+        .card-rating i { color: #ffffff; font-size: 1.2rem; } /* Bintang menjadi putih */
 
         /* =========================================
            FEATURES 
            ========================================= */
-        .features { background-color: var(--bg-section); border-top-left-radius: 50px; border-top-right-radius: 50px; margin-top: -50px; position: relative; z-index: 20; }
+        .features { background: rgba(255,255,255,0.01); border-top: 1px solid var(--glass-border); border-top-left-radius: 50px; border-top-right-radius: 50px; position: relative; z-index: 20; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
         
-        .f-card { background-color: var(--card-bg); border: 1px solid var(--card-border); padding: 32px; border-radius: 24px; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.02); height: 100%;}
-        .f-card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--primary-color); box-shadow: 0 20px 40px rgba(79, 70, 229, 0.1);}
-        .f-card.highlight { background-color: var(--primary-color); color: #fff; border: none; }
-        .f-card.highlight p { color: rgba(255,255,255,0.8); }
-        .f-card.highlight .icon-box { background: rgba(255,255,255,0.2); color: #fff; }
+        .f-card { padding: 32px; border-radius: 24px; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); height: 100%;}
+        .f-card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(255,255,255,0.3); box-shadow: 0 20px 40px rgba(255, 255, 255, 0.05);}
         
-        .icon-box { width: 50px; height: 50px; border-radius: 14px; background: rgba(79, 70, 229, 0.1); color: var(--primary-color); display: flex; justify-content: center; align-items: center; font-size: 1.3rem; margin-bottom: 24px; transition: 0.3s;}
-        .f-card:hover .icon-box { transform: rotate(10deg); }
+        /* Highlight Feature (Inverted Monokrom) */
+        .f-card.highlight { background-color: var(--primary-color); color: var(--primary-text); box-shadow: 0 0 50px rgba(255,255,255,0.15); border: none;}
+        .f-card.highlight p { color: #444; font-weight: 500;}
+        .f-card.highlight .icon-box { background: rgba(0,0,0,0.05); color: var(--primary-text); border-color: rgba(0,0,0,0.1);}
+        
+        .icon-box { width: 50px; height: 50px; border-radius: 14px; background: rgba(255,255,255,0.05); color: var(--primary-color); display: flex; justify-content: center; align-items: center; font-size: 1.3rem; margin-bottom: 24px; transition: 0.3s; border: 1px solid var(--glass-border);}
+        .f-card:hover .icon-box { transform: rotate(10deg); background: rgba(255,255,255,0.1); }
         .f-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
-        .f-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+        .f-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; font-weight: 300;}
 
         /* =========================================
            PORTFOLIO & PRICING
            ========================================= */
-        .bg-alt { background-color: var(--bg-alt); }
+        .bg-alt { background: rgba(255,255,255,0.015); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
         
-        .port-card { text-align: center; background: var(--card-bg); padding: 16px; border-radius: 24px; border: 1px solid var(--card-border); overflow: hidden; height: 100%;}
-        .port-card img { aspect-ratio: 1/1; margin-bottom: 16px; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);}
-        .port-card:hover img { transform: scale(1.08) translateY(-5px); }
-        .port-card h4 { font-size: 1.1rem; margin-bottom: 5px;}
+        .port-card { text-align: center; padding: 16px; border-radius: 24px; overflow: hidden; height: 100%;}
+        .port-card img { aspect-ratio: 1/1; margin-bottom: 16px; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); filter: grayscale(80%);}
+        .port-card:hover img { transform: scale(1.08) translateY(-5px); filter: grayscale(0%);}
+        .port-card h4 { font-size: 1.1rem; margin-bottom: 5px; font-weight: 600;}
         .port-card p { color: var(--text-muted); font-size: 0.9rem;}
 
-        .price-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 40px 30px; position: relative; transition: 0.4s; height: 100%;}
-        .price-card:hover { border-color: var(--primary-color); transform: translateY(-10px);}
-        .price-card.popular { border: 2px solid var(--primary-color); transform: scale(1.05); }
+        .price-card { border-radius: 24px; padding: 40px 30px; position: relative; transition: 0.4s; height: 100%;}
+        .price-card:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-10px);}
+        .price-card.popular { border: 1px solid rgba(255,255,255,0.6); transform: scale(1.05); background: rgba(255,255,255,0.08);}
         .price-card.popular:hover { transform: scale(1.05) translateY(-10px); }
         @media(max-width: 1024px) { .price-card.popular { transform: scale(1); } .price-card.popular:hover{transform: translateY(-10px);} }
         
-        .price-tag { position: absolute; top: -15px; right: 30px; background: var(--primary-color); color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);}
-        .price-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .price-card .amount { font-size: 2.5rem; font-weight: 800; margin: 20px 0; color: var(--primary-color);}
+        .price-tag { position: absolute; top: -15px; right: 30px; background: var(--primary-color); color: var(--primary-text); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);}
+        .price-card h3 { font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;}
+        .price-card .amount { font-size: 2.5rem; font-weight: 800; margin: 20px 0; color: var(--text-main);}
         .price-card .amount span { font-size: 1rem; color: var(--text-muted); }
-        .price-list li { display: flex; gap: 12px; margin-bottom: 16px; font-size: 0.95rem; color: var(--text-muted); }
-        .price-list i { color: var(--primary-color); margin-top: 4px; }
+        .price-list li { display: flex; gap: 12px; margin-bottom: 16px; font-size: 0.95rem; color: var(--text-muted); font-weight: 300;}
+        .price-list i { color: var(--text-main); margin-top: 4px; font-size: 0.85rem;}
 
         /* =========================================
            CONTACT & FOOTER
            ========================================= */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .contact-form { background: var(--card-bg); border: 1px solid var(--card-border); padding: 40px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.05);}
+        .contact-form { padding: 40px; border-radius: 30px;}
         .form-group { margin-bottom: 24px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 15px; background: transparent; border: 1px solid var(--input-border); border-radius: 12px; color: var(--text-main); font-size: 1rem; outline: none; transition: 0.3s; }
-        .form-group input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);}
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; color: var(--text-main); font-size: 1rem; outline: none; transition: 0.3s; }
+        .form-group input:focus { border-color: #fff; background: rgba(255,255,255,0.05); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);}
         
-        footer { border-top: 1px solid var(--card-border); padding: 80px 0 20px; background: var(--bg-body); }
+        footer { padding: 80px 0 20px; background: transparent; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-        .footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-col ul li { margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s;}
-        .footer-col ul li:hover { color: var(--primary-color); transform: translateX(5px);}
+        .footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600;}
+        .footer-col ul li { margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem; transition: 0.3s; font-weight: 300;}
+        .footer-col ul li:hover { color: #fff; transform: translateX(5px);}
         .socials { display: flex; gap: 15px; margin-top: 20px; }
-        .socials a { width: 40px; height: 40px; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; transition: 0.3s;}
-        .socials a:hover { background: var(--primary-color); color: #fff; transform: translateY(-5px) rotate(8deg);}
+        .socials a { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: 0.3s;}
+        .socials a:hover { background: var(--primary-color); color: var(--primary-text); transform: translateY(-5px) rotate(8deg);}
 
         /* =========================================
            RESPONSIVE & MOBILE SLIDER MAGIC
@@ -252,7 +246,8 @@
         }
         
         @media (max-width: 768px) {
-            .nav-links { position: absolute; top: 70px; left: 24px; right: 24px; background: var(--card-bg); padding: 24px; border-radius: 16px; flex-direction: column; border: 1px solid var(--card-border); display: none; text-align: center; box-shadow: var(--card-shadow);}
+            /* Mobile Navbar styling adjusted for glass */
+            .nav-links { position: absolute; top: 70px; left: 24px; right: 24px; background: rgba(10,10,10,0.95); backdrop-filter: var(--glass-blur); padding: 24px; border-radius: 16px; flex-direction: column; border: 1px solid var(--glass-border); display: none; text-align: center; box-shadow: var(--card-shadow);}
             .nav-links.active { display: flex; }
             .menu-btn { display: block; }
             .nav-actions .btn { display: none; }
@@ -264,38 +259,27 @@
             .features { border-top-left-radius: 30px; border-top-right-radius: 30px; }
             .price-card { padding: 30px 20px; }
 
-            /* ========================================================
-               MODIFIKASI: Mengubah Grid menjadi CSS Scroll Snap Slider
-               ======================================================== */
+            /* CSS Scroll Snap Slider untuk mobile (TETAP SAMA) */
             .grid-3 { 
-                display: flex; /* Ganti grid jadi flex ke samping */
-                flex-wrap: nowrap; /* Mencegah turun ke bawah */
-                overflow-x: auto; /* Aktifkan scroll horizontal */
-                scroll-snap-type: x mandatory; /* Snap efek saat scroll */
-                scroll-padding-left: 24px; /* Padding awalan untuk snap */
+                display: flex; 
+                flex-wrap: nowrap; 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                scroll-padding-left: 24px; 
                 
-                /* Manipulasi padding & margin agar scroll menembus layar HP tapi card tidak kepotong shadow-nya */
                 margin: 0 -24px; 
                 padding: 10px 24px 40px 24px; 
                 gap: 16px; 
                 
-                -webkit-overflow-scrolling: touch; /* Smooth scroll di iOS */
-                scrollbar-width: none; /* Hilangkan scrollbar di Firefox */
+                -webkit-overflow-scrolling: touch; 
+                scrollbar-width: none; 
             }
             
-            .grid-3::-webkit-scrollbar {
-                display: none; /* Hilangkan scrollbar di Chrome/Safari */
-            }
+            .grid-3::-webkit-scrollbar { display: none; }
+            .grid-3 > div { flex: 0 0 85%; scroll-snap-align: start; }
 
-            .grid-3 > div {
-                flex: 0 0 85%; /* Lebar card 85% dari layar agar card berikutnya ngintip sedikit */
-                scroll-snap-align: start; /* Posisi berhentinya scroll */
-            }
-
-            /* Matikan efek hover membesar di mobile agar tidak glitch terpotong overflow */
-            .f-card:hover, .price-card:hover, .price-card.popular:hover {
-                transform: translateY(0) scale(1);
-            }
+            /* Matikan hover mobile */
+            .f-card:hover, .price-card:hover, .price-card.popular:hover { transform: translateY(0) scale(1); }
         }
     </style>
 </head>
@@ -305,6 +289,8 @@
     <nav id="navbar">
         <div class="container nav-wrapper">
             <div class="logo">
+                <!-- GANTI URL SRC DI BAWAH INI DENGAN LINK LOGO ASLI ANDA -->
+                <img src="https://github.com/creativeinstd/Images/main/NEW-LOGO-CREATIVE-06-putih.png">
                 CREATIVEIN <span>STD</span>
             </div>
             <ul class="nav-links" id="navLinks">
@@ -315,7 +301,6 @@
                 <li><a href="#">Blog</a></li>
             </ul>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeBtn"><i class="fas fa-sun"></i></button>
                 <button class="btn btn-outline">Hubungi</button>
                 <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
             </div>
@@ -327,10 +312,10 @@
         <div class="container">
             <div class="badge reveal fade-down">Best Digital Agency For</div>
             <h1 class="reveal fade-up d-1">Start Up & Scale-Up</h1>
-            <p class="reveal fade-up d-2">Jangan sampai ketinggalan di era digital. Tahukah Kamu? kepercayaan calon customer dipengaruhi oleh desain dan konten yang menarik. Konsultasikan sekarang bersama kami. <strong>#let'sBeCreative</strong></p>
+            <p class="reveal fade-up d-2">Jangan sampai ketinggalan di era digital. Tahukah Kamu? kepercayaan calon customer dipengaruhi oleh desain dan konten yang menarik. Konsultasikan sekarang bersama kami.</p>
             
             <div class="reveal fade-up d-3" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <button class="btn btn-primary">Layanan Kami <i class="fas fa-arrow-down"></i></button>
+                <button class="btn btn-primary">Layanan Kami <i class="fas fa-arrow-down" style="color: black;"></i></button>
                 <button class="btn btn-outline"><i class="fab fa-whatsapp"></i> Contact Us</button>
             </div>
 
@@ -340,7 +325,7 @@
                         <h4>Projects Completed</h4>
                         <h2>2,145+</h2>
                         <div style="background: rgba(255,255,255,0.1); height: 6px; border-radius: 10px; margin-top: 15px;">
-                            <div style="background: var(--accent-color); width: 85%; height: 100%; border-radius: 10px;"></div>
+                            <div style="background: #ffffff; width: 85%; height: 100%; border-radius: 10px; box-shadow: 0 0 10px rgba(255,255,255,0.5);"></div>
                         </div>
                         <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">From 734+ Happy Clients</p>
                     </div>
@@ -353,7 +338,7 @@
                                 <h3 style="font-size: 1.2rem; font-weight: 700;">Social Media Growth</h3>
                                 <p style="font-size: 0.85rem; color: var(--text-muted);">Real-time engagement tracking</p>
                             </div>
-                            <div style="background: rgba(79, 70, 229, 0.1); color: var(--primary-color); padding: 5px 10px; border-radius: 8px; font-weight: bold;">+124%</div>
+                            <div style="background: rgba(255, 255, 255, 0.1); color: #fff; padding: 5px 10px; border-radius: 8px; font-weight: bold; border: 1px solid rgba(255,255,255,0.2);">+124%</div>
                         </div>
                         <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop" alt="Social Media Management">
                     </div>
@@ -361,9 +346,9 @@
 
                 <div class="anim-float" style="animation-delay: 2s;">
                     <div class="glass-card card-rating">
-                        <div class="badge" style="background: rgba(255,255,255,0.1); border:none; color: var(--text-main); margin-bottom: 10px;"><i class="fas fa-certificate" style="color: #38bdf8;"></i> Verified Agency</div>
+                        <div class="badge" style="background: rgba(255,255,255,0.1); border:none; color: var(--text-main); margin-bottom: 10px;"><i class="fas fa-certificate" style="color: #fff;"></i> Verified Agency</div>
                         <h3 style="font-size: 1.8rem; font-weight: 800;">4 Years</h3>
-                        <p style="font-size: 0.9rem; margin-bottom: 10px;">Professional Experience</p>
+                        <p style="font-size: 0.9rem; margin-bottom: 10px; font-weight: 300;">Professional Experience</p>
                         <div>
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
@@ -507,17 +492,17 @@
         <div class="container contact-grid">
             <div class="reveal fade-right">
                 <div class="badge">Konsultasi Gratis</div>
-                <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 800;">Punya Proyek di Pikiran Kamu?</h2>
-                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 30px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; letter-spacing: -1px;">Punya Proyek di Pikiran Kamu?</h2>
+                <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 30px; font-weight: 300;">
                     Apakah Kamu membutuhkan desain yang menarik dan profesional untuk usahamu? Jangan ragu untuk mempercayakan kebutuhan desain kepada Creativein.ig! Kami adalah partner kreatif yang siap membantu Kamu menciptakan visual yang memukau dan memperkuat brand bisnis Kamu.
                 </p>
                 <div style="display: flex; gap: 20px; align-items: center;">
-                    <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);">
+                    <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary-text); font-size: 1.5rem; box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15);">
                         <i class="fab fa-whatsapp"></i>
                     </div>
                     <div>
                         <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">Fast Response via WA</p>
-                        <h4 style="font-size: 1.1rem;">082 341 380 342</h4>
+                        <h4 style="font-size: 1.1rem; font-weight: 600;">082 341 380 342</h4>
                     </div>
                 </div>
             </div>
@@ -534,7 +519,7 @@
                     <div class="form-group">
                         <input type="text" placeholder="Brief atau Rencana Kasar (Opsional)">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Pesan <i class="fas fa-paper-plane"></i></button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Pesan <i class="fas fa-paper-plane" style="color: black;"></i></button>
                 </form>
             </div>
         </div>
@@ -546,6 +531,7 @@
             <div class="footer-grid">
                 <div class="footer-col reveal fade-up d-1">
                     <div class="logo" style="margin-bottom: 20px;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11516/11516140.png" alt="Creativein Logo" class="logo-img">
                         CREATIVEIN <span>STD</span>
                     </div>
                     <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-width: 300px;">
@@ -561,35 +547,35 @@
                 <div class="footer-col reveal fade-up d-2">
                     <h4>Layanan Utama</h4>
                     <ul>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Kelola Sosmed</li>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Feed Instagram</li>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Desain Logo</li>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Label & Packaging</li>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Desain Brosur</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Kelola Sosmed</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Feed Instagram</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Desain Logo</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Label & Packaging</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Desain Brosur</li>
                     </ul>
                 </div>
                 
                 <div class="footer-col reveal fade-up d-3">
                     <h4>Perusahaan</h4>
                     <ul>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Tentang Kami</li>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Portofolio Karya</li>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Sertifikat Legal</li>
-                        <li><i class="fas fa-angle-right" style="color:var(--primary-color); margin-right:5px;"></i> Syarat & Ketentuan</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Tentang Kami</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Portofolio Karya</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Sertifikat Legal</li>
+                        <li><i class="fas fa-angle-right" style="color:var(--text-main); margin-right:5px; font-size: 0.8rem;"></i> Syarat & Ketentuan</li>
                     </ul>
                 </div>
 
                 <div class="footer-col reveal fade-up d-4">
                     <h4>Hubungi Kami</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt" style="color:var(--primary-color); width: 20px;"></i> NTB - Mataram</li>
-                        <li><i class="fas fa-envelope" style="color:var(--primary-color); width: 20px;"></i> creativeinig@gmail.com</li>
-                        <li><i class="fas fa-clock" style="color:var(--primary-color); width: 20px;"></i> 08.00 - 16.30 WIB</li>
+                        <li><i class="fas fa-map-marker-alt" style="color:var(--text-main); width: 20px;"></i> NTB - Mataram</li>
+                        <li><i class="fas fa-envelope" style="color:var(--text-main); width: 20px;"></i> creativeinig@gmail.com</li>
+                        <li><i class="fas fa-clock" style="color:var(--text-main); width: 20px;"></i> 08.00 - 16.30 WIB</li>
                     </ul>
                 </div>
             </div>
             
-            <div class="reveal fade-up" style="border-top: 1px solid var(--card-border); padding-top: 24px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+            <div class="reveal fade-up" style="border-top: 1px solid var(--glass-border); padding-top: 24px; text-align: center; color: var(--text-muted); font-size: 0.9rem; font-weight: 300;">
                 <p>&copy; 2021 - 2025 Creativein.ig. All Rights Reserved.</p>
             </div>
         </div>
@@ -613,36 +599,11 @@
             }
         });
 
-        // 3. Dark/Light Mode Logic
-        const themeBtn = document.getElementById('themeBtn');
-        const htmlElement = document.documentElement;
-        
-        const currentTheme = localStorage.getItem('agency_theme') || 'dark';
-        htmlElement.setAttribute('data-theme', currentTheme);
-        updateThemeIcon(currentTheme);
-
-        themeBtn.addEventListener('click', () => {
-            let targetTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            htmlElement.setAttribute('data-theme', targetTheme);
-            localStorage.setItem('agency_theme', targetTheme);
-            updateThemeIcon(targetTheme);
-        });
-
-        function updateThemeIcon(theme) {
-            if(theme === 'light') {
-                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-                themeBtn.style.color = "#0f172a";
-            } else {
-                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-                themeBtn.style.color = "#ffffff";
-            }
-        }
-
-        // 4. Scroll Reveal Animations (Intersection Observer API)
+        // 3. Scroll Reveal Animations (Intersection Observer API)
         const revealElements = document.querySelectorAll('.reveal');
         
         const revealOptions = {
-            threshold: 0.15, // Animasi trigger saat elemen terlihat 15%
+            threshold: 0.15, 
             rootMargin: "0px 0px -50px 0px" 
         };
 
@@ -650,7 +611,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Stop observe setelah tampil untuk performa
+                    observer.unobserve(entry.target); 
                 }
             });
         }, revealOptions);
