@@ -124,8 +124,14 @@
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
         
         /* LOGO STYLES */
-        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px;}
-        .logo-img { height: 35px; width: auto; border-radius: 0; filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));}
+        .logo { display: flex; align-items: center; }
+        .logo-img { 
+            height: 45px; /* Anda bisa mengubah angka ini jika ingin lebih besar/kecil (misal: 35px atau 50px) */
+            width: auto; 
+            max-width: 250px; /* Mencegah logo memanjang merusak layout di HP */
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+        }
         .logo span { background: var(--primary-color); color: var(--primary-text); padding: 2px 8px; border-radius: 6px; font-size: 1.1rem;}
         
         .nav-links { display: flex; gap: 32px; }
@@ -530,7 +536,7 @@
             <div class="footer-grid">
                 <div class="footer-col reveal fade-up d-1">
                     <div class="logo" style="margin-bottom: 20px;">
-                        <img src="https://github.com/creativeinstd/Images/blob/raw/main/Logo.png">
+                        <img src="https://github.com/creativeinstd/Images/raw/main/Logo.png">
                     </div>
                     <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-width: 300px;">
                         Best Creative Market.<br>High Quality Design #1. Social Media Specialist, Creative Marketing Design & Branding.
