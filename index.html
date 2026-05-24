@@ -131,39 +131,21 @@
         /* LOGO STYLES */
         .logo { display: flex; align-items: center; }
         .logo-img { 
-            height: 40px; /* Ini ukuran tinggi ideal untuk navbar */
+            height: 40px; 
             width: auto; 
             max-width: 250px; 
             object-fit: contain;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
         }
-        .logo span { background: var(--primary-color); color: var(--primary-text); padding: 2px 8px; border-radius: 6px; font-size: 1.1rem;}
         
-        /* Mobile Navbar styling adjusted for glass */
-            .nav-links { 
-                position: absolute; 
-                top: 70px; 
-                
-                /* Trik untuk selalu di tengah (Center Align) */
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90%; /* Mengambil 90% layar agar tidak menyentuh ujung pinggir */
-                
-                background: rgba(10,10,10,0.98); 
-                backdrop-filter: var(--glass-blur); 
-                -webkit-backdrop-filter: var(--glass-blur);
-                padding: 30px 20px; 
-                border-radius: 16px; 
-                flex-direction: column; 
-                border: 1px solid var(--glass-border); 
-                display: none; 
-                text-align: center; 
-                box-shadow: var(--card-shadow);
-                
-                /* Aktifkan scroll di dalam menu utama jika layar HP sangat pendek */
-                max-height: 80vh; 
-                overflow-y: auto; 
-            }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: 0.3s; position: relative;}
+        .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0;
+            background-color: var(--primary-color); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
         
         .nav-actions { display: flex; align-items: center; gap: 16px; }
         .menu-btn { display: none; font-size: 1.5rem; background: none; border: none; color: var(--text-main); cursor: pointer; }
@@ -190,7 +172,7 @@
             visibility: hidden;
             transform: translateY(15px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 99; /* Agar dropdown selalu berada paling atas */
+            z-index: 99;
         }
         
         .dropdown:hover .mega-menu {
@@ -202,19 +184,18 @@
         .mega-content {
             display: flex;
             gap: 50px;
-            align-items: center; /* Membuat gambar & teks sejajar di tengah vertikal */
+            align-items: center; 
         }
 
-        /* 3 Gambar Kiri */
         .mega-images {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Pasti dibagi 3 rata */
+            grid-template-columns: repeat(3, 1fr); 
             gap: 15px;
-            width: 45%; /* Porsi untuk gambar 45% */
+            width: 45%; 
         }
         .mega-images img {
             width: 100%;
-            height: 220px; /* Tinggi dikunci agar seragam dan rapi */
+            height: 220px; 
             object-fit: cover;
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.1);
@@ -227,10 +208,9 @@
             border-color: var(--primary-color);
         }
 
-        /* Teks Kanan: Otomatis Kolom */
         .mega-links {
-            width: 55%; /* Porsi untuk teks 55% */
-            column-count: 3; /* Teks otomatis dibagi jadi 3 kolom berdampingan */
+            width: 55%; 
+            column-count: 3; 
             column-gap: 20px;
         }
 
@@ -242,7 +222,7 @@
             border-radius: 8px;
             transition: 0.3s;
             margin-bottom: 8px;
-            break-inside: avoid; /* Mencegah tulisan terpotong di tengah antar kolom */
+            break-inside: avoid; 
         }
         .mega-links a::after { display: none !important; } 
         
@@ -285,7 +265,7 @@
         .card-main:hover img { transform: scale(1.05); }
         
         .card-rating { width: 220px; background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); }
-        .card-rating i { color: #ffffff; font-size: 1.2rem; } /* Bintang menjadi putih */
+        .card-rating i { color: #ffffff; font-size: 1.2rem; }
 
         /* =========================================
            FEATURES 
@@ -296,7 +276,6 @@
         .f-card { padding: 32px; border-radius: 24px; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); height: 100%;}
         .f-card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(255,255,255,0.3); box-shadow: 0 20px 40px rgba(255, 255, 255, 0.05);}
         
-        /* Highlight Feature (Inverted Monokrom) */
         .f-card.highlight { background-color: var(--primary-color); color: var(--primary-text); box-shadow: 0 0 50px rgba(255,255,255,0.15); border: none;}
         .f-card.highlight p { color: #444; font-weight: 500;}
         .f-card.highlight .icon-box { background: rgba(0,0,0,0.05); color: var(--primary-text); border-color: rgba(0,0,0,0.1);}
@@ -348,7 +327,7 @@
         .socials a { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: 0.3s;}
         .socials a:hover { background: var(--primary-color); color: var(--primary-text); transform: translateY(-5px) rotate(8deg);}
 
-       /* =========================================
+        /* =========================================
            RESPONSIVE & MOBILE SLIDER MAGIC
            ========================================= */
         @media (max-width: 992px) {
@@ -358,15 +337,12 @@
         }
         
         @media (max-width: 768px) {
-            /* Mobile Navbar styling adjusted for glass */
             .nav-links { 
                 position: absolute; 
                 top: 70px; 
-                /* Beri jarak dari kiri kanan agar tidak nempel pojok */
-                left: 20px; 
-                right: 20px; 
-                width: auto; /* Width auto agar mengikuti left-right */
-                
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%; 
                 background: rgba(10,10,10,0.98); 
                 backdrop-filter: var(--glass-blur); 
                 -webkit-backdrop-filter: var(--glass-blur);
@@ -377,8 +353,6 @@
                 display: none; 
                 text-align: center; 
                 box-shadow: var(--card-shadow);
-                
-                /* Aktifkan scroll di dalam menu utama jika layar HP sangat pendek */
                 max-height: 80vh; 
                 overflow-y: auto; 
             }
@@ -394,61 +368,50 @@
             .price-card { padding: 30px 20px; }
 
             /* Fix Mega Menu untuk HP (Mobile) */
-            .dropdown { position: relative; } 
+            .dropdown { position: relative; width: 100%; } 
+            
             .mega-menu {
                 position: static;
                 width: 100%;
+                display: none; 
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255,255,255,0.05);
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+                margin-top: 15px;
+                padding: 10px;
+                border-radius: 12px;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
-                display: none;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid var(--glass-border);
-                box-shadow: none;
-                margin-top: 10px;
-                padding: 15px;
-                border-radius: 16px;
                 z-index: 1;
             }
             .dropdown:hover .mega-menu { display: block; }
-            .mega-content { flex-direction: column; gap: 20px; align-items: stretch; }
-            
-            .mega-images { display: none; } /* Gambar disembunyikan di HP agar menu tidak terlalu panjang */
-            
-            .mega-links { 
-                width: 100%;
-                column-count: 1; /* Di HP, teks kembali memanjang 1 baris ke bawah */
-            }
-            .mega-links a { padding: 10px; transform: none !important; margin-bottom: 0; }
-            
+            .mega-content { flex-direction: column; gap: 0; align-items: stretch; padding: 0;}
+            .mega-images { display: none; } 
+            .mega-links { width: 100%; column-count: 1; }
             .mega-links a { 
                 padding: 12px 10px; 
                 transform: none !important; 
                 margin-bottom: 0;
                 border-bottom: 1px solid rgba(255,255,255,0.02);
             }
-            .mega-links a:last-child { border-bottom: none; } /* Hilangkan border garis di teks paling bawah */
+            .mega-links a:last-child { border-bottom: none; } 
 
-            /* CSS Scroll Snap Slider untuk mobile (TETAP SAMA) */
+            /* CSS Scroll Snap Slider untuk mobile */
             .grid-3 { 
                 display: flex; 
                 flex-wrap: nowrap; 
                 overflow-x: auto; 
                 scroll-snap-type: x mandatory; 
                 scroll-padding-left: 24px; 
-                
                 margin: 0 -24px; 
                 padding: 10px 24px 40px 24px; 
                 gap: 16px; 
-                
                 -webkit-overflow-scrolling: touch; 
                 scrollbar-width: none; 
             }
-            
             .grid-3::-webkit-scrollbar { display: none; }
             .grid-3 > div { flex: 0 0 85%; scroll-snap-align: start; }
-
-            /* Matikan hover mobile */
             .f-card:hover, .price-card:hover, .price-card.popular:hover { transform: translateY(0) scale(1); }
         }
     </style>
@@ -468,7 +431,6 @@
                 <!-- MEGA MENU LAYANAN -->
                 <li class="dropdown">
                     <a href="#">Layanan <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
-                    
                     <div class="mega-menu">
                         <div class="container mega-content">
                             <!-- BAGIAN KIRI: 3 GAMBAR -->
@@ -477,7 +439,6 @@
                                 <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=300&auto=format&fit=crop" alt="Desain">
                                 <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=300&auto=format&fit=crop" alt="Logo">
                             </div>
-
                             <!-- BAGIAN KANAN: MENU MAKS 5 BARIS -->
                             <div class="mega-links">
                                 <a href="#">Semua Layanan</a>
@@ -630,14 +591,12 @@
                 </div>
             </div>
             <div class="reveal fade-up d-4" style="text-align: center; margin-top: 40px;">
-                <!-- UBAH TANDA PAGAR (#) DI BAWAH INI DENGAN LINK WEB/IG PORTOFOLIO ANDA -->
                 <a href="https://www.instagram.com/creativein.ig/" target="_blank" class="btn btn-outline">Lihat Portofolio Lainnya</a>
             </div>
         </div>
     </section>
 
     <!-- PRICING -->
-     <!-- PRICING -->
      <section id="paket" class="section-padding">
         <div class="container">
             <div class="section-header reveal fade-up">
@@ -645,11 +604,8 @@
                 <p>Sosial Media Management & Desain, Rebahan dirumah tinggal terima beres. Fokus pada bisnis Anda.</p>
             </div>
 
-            <!-- Ditambahkan align-items: flex-start agar tidak dipaksa sama rata -->
             <div class="grid-3" style="align-items: flex-start;">
-                
-                <!-- Ditambahkan height: fit-content; -->
-                <div class="price-card reveal fade-right d-1" style="height: fit-content;">
+                <div class="price-card reveal fade-right d-1" style="height: fit-content; display: flex; flex-direction: column;">
                     <h3>Paket Logo</h3>
                     <p style="font-size: 0.9rem; color: var(--text-muted);">Desain logo unik sesuai visi misi usaha</p>
                     <div style="text-decoration: line-through; color: var(--text-muted); font-size: 1.1rem; font-weight: 500; margin-top: 25px; margin-bottom: -15px;">Rp 1.500.000</div>
@@ -664,11 +620,10 @@
                         <li><i class="fas fa-check"></i> Free Banner/Desain Feed</li>
                         <li><i class="fas fa-check"></i> Free Mockup Implementasi</li>
                     </ul>
-                    <a href="#" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 20px;">Pilih Paket</a>
+                    <a href="#" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: auto;">Pilih Paket</a>
                 </div>
 
-                 <!-- Ditambahkan height: fit-content; -->
-                 <div class="price-card popular reveal fade-up d-2" style="height: fit-content;">
+                 <div class="price-card popular reveal fade-up d-2" style="height: fit-content; display: flex; flex-direction: column;">
                     <div class="price-tag">Paling Laris</div>
                     <h3>Kelola Sosmed</h3>
                     <p style="font-size: 0.9rem; color: var(--text-muted);">Tingkatkan engagement sekarang juga</p>
@@ -693,11 +648,10 @@
                         <li><i class="fas fa-check"></i> Bonus 40+ produk digital</li>
                         <li><i class="fas fa-check"></i> Bonus Icon highlight</li>
                     </ul>
-                    <a href="#" target="_blank" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Pilih Paket</a>
+                    <a href="#" target="_blank" class="btn btn-primary" style="width: 100%; margin-top: auto;">Pilih Paket</a>
                 </div>
 
-                 <!-- Ditambahkan height: fit-content; -->
-                 <div class="price-card reveal fade-left d-3" style="height: fit-content;">
+                 <div class="price-card reveal fade-left d-3" style="height: fit-content; display: flex; flex-direction: column;">
                     <h3>Paket Feed Satuan</h3>
                     <p style="font-size: 0.9rem; color: var(--text-muted);">Order desain satuan dengan brief khusus</p>
                      <div style="text-decoration: line-through; color: var(--text-muted); font-size: 1.1rem; font-weight: 500; margin-top: 25px; margin-bottom: -15px;">Rp 600.000</div>
@@ -709,13 +663,13 @@
                         <li><i class="fas fa-check"></i> Desain Exclusive Original</li>
                         <li><i class="fas fa-check"></i> Free Konsultasi Konsep</li>
                     </ul>
-                    <a href="#" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: 20px;">Pilih Paket</a>
+                    <a href="#" target="_blank" class="btn btn-outline" style="width: 100%; margin-top: auto;">Pilih Paket</a>
                 </div>
             </div>
         </div>
     </section>
 
-   <!-- CONTACT FORM -->
+    <!-- CONTACT FORM -->
     <section id="kontak" class="bg-alt section-padding">
         <div class="container contact-grid">
             <div class="reveal fade-right">
@@ -737,17 +691,14 @@
             
             <div class="contact-form reveal fade-left d-2">
                 <h3 style="margin-bottom: 30px; font-size: 1.5rem;">Dapatkan Penawaran</h3>
-                <!-- Form ditambahkan ID dan event onsubmit -->
                 <form id="formWA" onsubmit="kirimKeWhatsapp(event)">
                     <div class="form-group">
-                        <!-- Input ditambahkan ID -->
                         <input type="text" id="waNama" placeholder="Nama Lengkap" required>
                     </div>
                     <div class="form-group">
                         <input type="text" id="waProyek" placeholder="Jenis Project (Logo, Poster, Sosmed)" required>
                     </div>
                     <div class="form-group">
-                        <!-- Diubah menjadi textarea agar user bisa ngetik panjang / enter ke bawah -->
                         <textarea id="waBrief" placeholder="Brief atau Rencana Kasar (Opsional)" rows="4" style="resize: none;"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Pesan <i class="fas fa-paper-plane" style="color: black;"></i></button>
