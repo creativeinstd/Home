@@ -201,6 +201,88 @@
             color: var(--text-main) !important;
             padding-left: 25px; /* Animasi geser kanan sedikit saat disorot */
         }
+        /* =========================================
+           MEGA MENU (FULL LEBAR DESKTOP)
+           ========================================= */
+        .dropdown { position: static; } /* Lepaskan dropdown dari elemen <li> agar bisa full layar */
+        
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%; /* Full lebar layar */
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 40px 0;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7);
+            
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1; 
+        }
+        
+        .dropdown:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-content {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        /* 3 Gambar Kiri */
+        .mega-images {
+            display: flex;
+            gap: 15px;
+            width: 40%; /* Mengambil porsi 40% dari ruang */
+        }
+        .mega-images img {
+            flex: 1;
+            height: 100%;
+            min-height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            filter: grayscale(80%);
+            transition: 0.4s ease;
+        }
+        .mega-images img:hover {
+            transform: translateY(-5px);
+            filter: grayscale(0%);
+            border-color: var(--primary-color);
+        }
+
+        /* Teks Kanan: Grid 5 Baris */
+        .mega-links {
+            flex: 1; /* Mengambil sisa ruang 60% */
+            display: grid;
+            grid-template-rows: repeat(5, auto); /* KUNCI UTAMA: Teks mentok di 5 baris lalu otomatis bergeser ke kolom baru */
+            grid-auto-flow: column;
+            gap: 12px 30px;
+        }
+
+        .mega-links a {
+            color: var(--text-muted) !important;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .mega-links a::after { display: none !important; } /* Matikan animasi garis bawah global */
+        
+        .mega-links a:hover {
+            color: var(--text-main) !important;
+            background: rgba(255,255,255,0.05);
+            transform: translateX(5px);
+        }
 
         /* =========================================
            GLOBAL GLASS CARDS (APPLIED EVERYWHERE)
@@ -321,8 +403,9 @@
             .features { border-top-left-radius: 30px; border-top-right-radius: 30px; }
             .price-card { padding: 30px 20px; }
 
-            /* Mobile Dropdown Fix */
-            .dropdown-menu {
+            /* Fix Mega Menu untuk HP (Mobile) */
+            .dropdown { position: relative; } 
+            .mega-menu {
                 position: static;
                 width: 100%;
                 opacity: 1;
@@ -330,13 +413,23 @@
                 transform: none;
                 display: none;
                 background: rgba(255, 255, 255, 0.02);
-                border: none;
+                border: 1px solid var(--glass-border);
                 box-shadow: none;
                 margin-top: 10px;
-                padding: 10px 0;
-                max-height: 250px;
+                padding: 15px;
+                border-radius: 16px;
             }
-            .dropdown:hover .dropdown-menu { display: flex; }
+            .dropdown:hover .mega-menu { display: block; }
+            .mega-content { flex-direction: column; gap: 20px; }
+            
+            .mega-images { display: none; } /* Gambar dihapus saat di HP agar menu tidak kepanjangan */
+            
+            .mega-links { 
+                display: flex; /* Ganti format ke susunan atas-bawah standar */
+                flex-direction: column; 
+                gap: 5px; 
+            }
+            .mega-links a { padding: 10px; transform: none !important; }
 
             /* CSS Scroll Snap Slider untuk mobile (TETAP SAMA) */
             .grid-3 { 
@@ -374,26 +467,39 @@
                 <li><a href="#" class="active">Beranda</a></li>
                 <li><a href="#">Tentang Kami</a></li>
                 
-                <!-- DROPDOWN LAYANAN -->
+                <!-- MEGA MENU LAYANAN -->
                 <li class="dropdown">
                     <a href="#">Layanan <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Semua Layanan</a></li>
-                        <li><a href="#">Kelola Sosmed</a></li>
-                        <li><a href="#">Paket Feed Satuan</a></li>
-                        <li><a href="#">Desain Marketplace</a></li>
-                        <li><a href="#">Kontrak Desainer</a></li>
-                        <li><a href="#">Logo</a></li>
-                        <li><a href="#">Label / Sticker</a></li>
-                        <li><a href="#">Poster</a></li>
-                        <li><a href="#">Banner</a></li>
-                        <li><a href="#">Flyer</a></li>
-                        <li><a href="#">Packaging</a></li>
-                        <li><a href="#">Menu</a></li>
-                        <li><a href="#">Undangan / Ucapan</a></li>
-                        <li><a href="#">Digital Imaging</a></li>
-                        <li><a href="#">Custom Desain</a></li>
-                    </ul>
+                    
+                    <div class="mega-menu">
+                        <div class="container mega-content">
+                            <!-- BAGIAN KIRI: 3 GAMBAR -->
+                            <div class="mega-images">
+                                <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=300&auto=format&fit=crop" alt="Sosmed">
+                                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=300&auto=format&fit=crop" alt="Desain">
+                                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=300&auto=format&fit=crop" alt="Logo">
+                            </div>
+
+                            <!-- BAGIAN KANAN: MENU MAKS 5 BARIS -->
+                            <div class="mega-links">
+                                <a href="#">Semua Layanan</a>
+                                <a href="#">Kelola Sosmed</a>
+                                <a href="#">Paket Feed Satuan</a>
+                                <a href="#">Desain Marketplace</a>
+                                <a href="#">Kontrak Desainer</a>
+                                <a href="#">Logo</a>
+                                <a href="#">Label / Sticker</a>
+                                <a href="#">Poster</a>
+                                <a href="#">Banner</a>
+                                <a href="#">Flyer</a>
+                                <a href="#">Packaging</a>
+                                <a href="#">Menu</a>
+                                <a href="#">Undangan / Ucapan</a>
+                                <a href="#">Digital Imaging</a>
+                                <a href="#">Custom Desain</a>
+                            </div>
+                        </div>
+                    </div>
                 </li>
 
                 <li><a href="#">Portofolio</a></li>
