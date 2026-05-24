@@ -152,6 +152,57 @@
         .menu-btn { display: none; font-size: 1.5rem; background: none; border: none; color: var(--text-main); cursor: pointer; }
 
         /* =========================================
+           DROPDOWN MENU STYLES
+           ========================================= */
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 10px 0;
+            min-width: 240px;
+            max-height: 400px; /* Membatasi tinggi agar bisa di-scroll jika kepanjangan */
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--card-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Custom Scrollbar untuk Dropdown */
+        .dropdown-menu::-webkit-scrollbar { width: 4px; }
+        .dropdown-menu::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            font-size: 0.9rem !important;
+            font-weight: 400 !important;
+            color: var(--text-muted) !important;
+        }
+        
+        .dropdown-menu a::after { display: none !important; } /* Hilangkan garis bawah */
+        .dropdown-menu a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main) !important;
+            padding-left: 25px; /* Animasi geser kanan sedikit saat disorot */
+        }
+
+        /* =========================================
            GLOBAL GLASS CARDS (APPLIED EVERYWHERE)
            ========================================= */
         .glass-card, .f-card, .port-card, .price-card, .contact-form, .socials a {
@@ -270,6 +321,23 @@
             .features { border-top-left-radius: 30px; border-top-right-radius: 30px; }
             .price-card { padding: 30px 20px; }
 
+            /* Mobile Dropdown Fix */
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                background: rgba(255, 255, 255, 0.02);
+                border: none;
+                box-shadow: none;
+                margin-top: 10px;
+                padding: 10px 0;
+                max-height: 250px;
+            }
+            .dropdown:hover .dropdown-menu { display: flex; }
+
             /* CSS Scroll Snap Slider untuk mobile (TETAP SAMA) */
             .grid-3 { 
                 display: flex; 
@@ -305,7 +373,29 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" class="active">Beranda</a></li>
                 <li><a href="#">Tentang Kami</a></li>
-                <li><a href="#">Layanan</a></li>
+                
+                <!-- DROPDOWN LAYANAN -->
+                <li class="dropdown">
+                    <a href="#">Layanan <i class="fas fa-chevron-down" style="font-size: 0.7em; margin-left: 4px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Semua Layanan</a></li>
+                        <li><a href="#">Kelola Sosmed</a></li>
+                        <li><a href="#">Paket Feed Satuan</a></li>
+                        <li><a href="#">Desain Marketplace</a></li>
+                        <li><a href="#">Kontrak Desainer</a></li>
+                        <li><a href="#">Logo</a></li>
+                        <li><a href="#">Label / Sticker</a></li>
+                        <li><a href="#">Poster</a></li>
+                        <li><a href="#">Banner</a></li>
+                        <li><a href="#">Flyer</a></li>
+                        <li><a href="#">Packaging</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#">Undangan / Ucapan</a></li>
+                        <li><a href="#">Digital Imaging</a></li>
+                        <li><a href="#">Custom Desain</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="#">Portofolio</a></li>
                 <li><a href="#">Blog</a></li>
             </ul>
