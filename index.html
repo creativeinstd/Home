@@ -342,7 +342,29 @@
         
         @media (max-width: 768px) {
             /* Mobile Navbar styling adjusted for glass */
-            .nav-links { position: absolute; top: 70px; left: 24px; right: 24px; background: rgba(10,10,10,0.95); backdrop-filter: var(--glass-blur); padding: 24px; border-radius: 16px; flex-direction: column; border: 1px solid var(--glass-border); display: none; text-align: center; box-shadow: var(--card-shadow);}
+            .nav-links { 
+                position: absolute; 
+                top: 70px; 
+                /* Beri jarak dari kiri kanan agar tidak nempel pojok */
+                left: 20px; 
+                right: 20px; 
+                width: auto; /* Width auto agar mengikuti left-right */
+                
+                background: rgba(10,10,10,0.98); 
+                backdrop-filter: var(--glass-blur); 
+                -webkit-backdrop-filter: var(--glass-blur);
+                padding: 30px 20px; 
+                border-radius: 16px; 
+                flex-direction: column; 
+                border: 1px solid var(--glass-border); 
+                display: none; 
+                text-align: center; 
+                box-shadow: var(--card-shadow);
+                
+                /* Aktifkan scroll di dalam menu utama jika layar HP sangat pendek */
+                max-height: 80vh; 
+                overflow-y: auto; 
+            }
             .nav-links.active { display: flex; }
             .menu-btn { display: block; }
             .nav-actions .btn { display: none; }
@@ -355,32 +377,44 @@
             .price-card { padding: 30px 20px; }
 
             /* Fix Mega Menu untuk HP (Mobile) */
-            .dropdown { position: relative; } 
+            .dropdown { position: relative; width: 100%; } 
+            
             .mega-menu {
                 position: static;
                 width: 100%;
+                display: none; /* Disembunyikan dulu */
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255,255,255,0.05);
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+                margin-top: 15px;
+                padding: 10px;
+                border-radius: 12px;
+                
+                /* Supaya dropdown ini tidak transparan ke luar layar HP */
                 opacity: 1;
                 visibility: visible;
                 transform: none;
-                display: none;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid var(--glass-border);
-                box-shadow: none;
-                margin-top: 10px;
-                padding: 15px;
-                border-radius: 16px;
                 z-index: 1;
             }
+            /* Saat tulisan Layanan disorot/diklik di HP, menunya muncul */
             .dropdown:hover .mega-menu { display: block; }
-            .mega-content { flex-direction: column; gap: 20px; align-items: stretch; }
             
-            .mega-images { display: none; } /* Gambar disembunyikan di HP agar menu tidak terlalu panjang */
+            .mega-content { flex-direction: column; gap: 0; align-items: stretch; padding: 0;}
+            
+            .mega-images { display: none; } /* Gambar dihapus saat di HP */
             
             .mega-links { 
                 width: 100%;
-                column-count: 1; /* Di HP, teks kembali memanjang 1 baris ke bawah */
+                column-count: 1; /* Tek ditumpuk ke bawah 1 kolom */
             }
-            .mega-links a { padding: 10px; transform: none !important; margin-bottom: 0; }
+            
+            .mega-links a { 
+                padding: 12px 10px; 
+                transform: none !important; 
+                margin-bottom: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.02);
+            }
+            .mega-links a:last-child { border-bottom: none; } /* Hilangkan border garis di teks paling bawah */
 
             /* CSS Scroll Snap Slider untuk mobile (TETAP SAMA) */
             .grid-3 { 
