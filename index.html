@@ -521,7 +521,7 @@
         </div>
     </section>
 
-    <!-- CONTACT FORM -->
+   <!-- CONTACT FORM -->
     <section id="kontak" class="bg-alt section-padding">
         <div class="container contact-grid">
             <div class="reveal fade-right">
@@ -543,15 +543,18 @@
             
             <div class="contact-form reveal fade-left d-2">
                 <h3 style="margin-bottom: 30px; font-size: 1.5rem;">Dapatkan Penawaran</h3>
-                <form>
+                <!-- Form ditambahkan ID dan event onsubmit -->
+                <form id="formWA" onsubmit="kirimKeWhatsapp(event)">
                     <div class="form-group">
-                        <input type="text" placeholder="Nama Lengkap" required>
+                        <!-- Input ditambahkan ID -->
+                        <input type="text" id="waNama" placeholder="Nama Lengkap" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Jenis Project (Logo, Poster, Sosmed)" required>
+                        <input type="text" id="waProyek" placeholder="Jenis Project (Logo, Poster, Sosmed)" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Brief atau Rencana Kasar (Opsional)">
+                        <!-- Diubah menjadi textarea agar user bisa ngetik panjang / enter ke bawah -->
+                        <textarea id="waBrief" placeholder="Brief atau Rencana Kasar (Opsional)" rows="4" style="resize: none;"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Pesan <i class="fas fa-paper-plane" style="color: black;"></i></button>
                 </form>
@@ -651,6 +654,40 @@
         revealElements.forEach(el => {
             revealOnScroll.observe(el);
         });
+    </script>
+    
+    <script>
+        // Fungsi Kirim ke WhatsApp
+        function kirimKeWhatsapp(event) {
+            // Mencegah halaman reload saat tombol diklik
+            event.preventDefault();
+
+            // Mengambil nilai dari form
+            const nama = document.getElementById('waNama').value;
+            const proyek = document.getElementById('waProyek').value;
+            const brief = document.getElementById('waBrief').value;
+
+            // Nomor WA tujuan (Pastikan pakai format 62)
+            const nomorWA = "6282341380342";
+
+            // Menyusun format pesan dengan spasi (enter) ke bawah
+            // \n berfungsi sebagai Enter / baris baru
+            let pesan = `Halo Creativein.std! 👋\n`;
+            pesan += `Saya ingin meminta penawaran untuk project, berikut detailnya:\n\n`;
+            pesan += `*Nama:* ${nama}\n`;
+            pesan += `*Jenis Project:* ${proyek}\n`;
+            pesan += `*Brief/Rencana:* \n${brief || '-'}\n\n`;
+            pesan += `Mohon info harga dan prosedurnya ya. Terima kasih!`;
+
+            // Mengubah format teks menjadi format URL yang dipahami WhatsApp
+            const pesanEncode = encodeURIComponent(pesan);
+
+            // Membuat link akhir
+            const linkWhatsapp = `https://wa.me/${nomorWA}?text=${pesanEncode}`;
+
+            // Membuka WhatsApp di tab baru
+            window.open(linkWhatsapp, '_blank');
+        }
     </script>
 </body>
 </html>
