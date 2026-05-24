@@ -40,6 +40,129 @@
         }
 
         /* =========================================
+           TOP PROMO BANNER (GLASS GRADIENT)
+           ========================================= */
+        .top-promo {
+            background: linear-gradient(90deg, rgba(190, 242, 100, 0.15) 0%, rgba(163, 230, 53, 0.05) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(190, 242, 100, 0.2);
+            padding: 12px 0;
+            position: fixed; /* Menempel di paling atas */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001; /* Harus lebih tinggi dari Navbar */
+            animation: promoPulse 3s infinite alternate ease-in-out;
+        }
+
+        /* Animasi cahaya berdenyut pada background banner */
+        @keyframes promoPulse {
+            0% { background: linear-gradient(90deg, rgba(190, 242, 100, 0.1) 0%, rgba(163, 230, 53, 0.02) 100%); }
+            100% { background: linear-gradient(90deg, rgba(190, 242, 100, 0.25) 0%, rgba(163, 230, 53, 0.1) 100%); }
+        }
+
+        .promo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .promo-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+        }
+
+        .p-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .p-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #d9f99d; /* Warna Lime Green Terang */
+            text-shadow: 0 0 10px rgba(190, 242, 100, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .promo-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .p-slot {
+            border: 1px solid rgba(190, 242, 100, 0.5);
+            color: #d9f99d;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(190, 242, 100, 0.05);
+            animation: bounceIn 2s infinite; /* Animasi bergerak sedikit pada kotak slot */
+        }
+        
+        @keyframes bounceIn {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .p-btn {
+            background: #111111;
+            color: #ffffff;
+            padding: 7px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid #333;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animasi kilap (shine) yang melintas di tombol Ambil Promo */
+        .p-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+            transition: 0.5s;
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -60%; }
+            100% { left: 150%; }
+        }
+
+        .p-btn:hover {
+            background: #d9f99d;
+            color: #000;
+            border-color: #d9f99d;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(190, 242, 100, 0.5);
+        }
+
+        /* Penyesuaian Promo di HP */
+        @media (max-width: 768px) {
+            .promo-wrapper { gap: 8px; text-align: center; }
+            .p-title { font-size: 1.1rem; }
+            .promo-buttons { justify-content: center; width: 100%; }
+            .top-promo { padding: 10px 0; }
+        }
+
+        /* =========================================
            BASE STYLES
            ========================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -114,16 +237,25 @@
             padding: 24px 0; 
             position: fixed;
             width: 100%;
-            top: 0;
+            /* Top diatur agar memberi ruang untuk banner promo di atasnya (kira-kira tinggi banner 60px) */
+            top: 60px; 
             z-index: 1000; 
             transition: all 0.4s ease;
         }
+        
+        /* Saat di scroll, navbar akan naik mengisi ruang atas menimpa banner */
         nav.scrolled {
             padding: 15px 0;
+            top: 0; /* Navbar kembali ke puncak saat di scroll */
             background: rgba(var(--bg-body-rgb), 0.5);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--glass-border);
+        }
+        
+        /* Menyesuaikan jarak di HP saat promo tampil */
+        @media (max-width: 768px) {
+            nav { top: 75px; } /* Tinggi banner di HP memakan 2 baris (sekitar 75px) */
         }
 
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
@@ -131,12 +263,13 @@
         /* LOGO STYLES */
         .logo { display: flex; align-items: center; }
         .logo-img { 
-            height: 40px; 
+            height: 40px; /* Ini ukuran tinggi ideal untuk navbar */
             width: auto; 
             max-width: 250px; 
             object-fit: contain;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
         }
+        .logo span { background: var(--primary-color); color: var(--primary-text); padding: 2px 8px; border-radius: 6px; font-size: 1.1rem;}
         
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: 0.3s; position: relative;}
@@ -246,6 +379,7 @@
         /* =========================================
            HERO SECTION
            ========================================= */
+        /* Padding atas ditambah agar tidak tertutup Navbar yang turun */   
         .hero { padding: 180px 0 120px; text-align: center; position: relative; }
         .hero h1 { font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; letter-spacing: -2px; }
         .hero p { font-size: 1.1rem; color: var(--text-muted); font-weight: 300; margin-bottom: 40px; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto; }
@@ -417,6 +551,20 @@
     </style>
 </head>
 <body>
+
+    <!-- TOP PROMO BANNER -->
+    <div class="top-promo">
+        <div class="container promo-wrapper">
+            <div class="promo-info">
+                <span class="p-sub">Kelola Sosmed</span>
+                <span class="p-title">Discount Up To 50%</span>
+            </div>
+            <div class="promo-buttons">
+                <div class="p-slot">Sisa 3 slot</div>
+                <a href="#paket" class="p-btn">Ambil Promo</a>
+            </div>
+        </div>
+    </div>
 
     <!-- NAVBAR -->
     <nav id="navbar">
@@ -771,8 +919,9 @@
 
         // 2. Sticky Navbar Effect on Scroll
         const navbar = document.getElementById('navbar');
+        // Script menyesuaikan posisi top agar tidak tabrakan dengan banner saat di scroll
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+            if (window.scrollY > 10) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
