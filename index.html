@@ -17,15 +17,13 @@
         /* Mengaktifkan scroll mulus & Kunci layar dari geser horizontal */
         html {
             scroll-behavior: smooth;
-            overflow-x: hidden;
         }
         body { 
             width: 100%;
             overflow-x: hidden;
             position: relative;
-            -webkit-overflow-scrolling: touch; /* KUNCI RAHASIA: Mengembalikan efek scroll meluncur mulus di HP */
+            /* HAPUS -webkit-overflow-scrolling dari body agar tidak terjadi BUG STUCK saat pertama kali scroll di HP */
         }
-        nav { left: 0; }
         
         /* =========================================
            CSS VARIABLES - BLACK, WHITE & GLASS THEME
