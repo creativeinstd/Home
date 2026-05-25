@@ -14,6 +14,80 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+
+        /* =========================================
+           SALES NOTIFICATION POPUP (CLEAN WHITE)
+           ========================================= */
+        .sales-popup {
+            position: fixed;
+            bottom: 30px;
+            left: -400px; /* Tersembunyi di luar layar kiri */
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0,0,0,0.05);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: max-content;
+            max-width: 340px;
+            z-index: 1005; /* Di atas segalanya */
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Animasi meluncur sangat smooth */
+        }
+        
+        .sales-popup.show {
+            left: 30px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sp-icon {
+            font-size: 24px;
+            color: #22c55e; /* Warna Hijau Centang */
+            animation: pulse-green 2s infinite; /* Berdenyut pelan */
+        }
+
+        .sp-content p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #1f2937; /* Teks Hitam Lembut */
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .sp-content p strong {
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .sp-content span {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            display: block;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(34, 197, 94, 0.4)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.6)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(34, 197, 94, 0)); }
+        }
+
+        /* Penyesuaian agar rapi di layar HP */
+        @media (max-width: 768px) {
+            .sales-popup {
+                max-width: 90%;
+                bottom: 20px;
+            }
+            /* Muncul agak ke tengah di HP agar tidak terpotong layar */
+            .sales-popup.show { 
+                left: 5%; 
+            }
+        }
+        
         /* Mengaktifkan scroll mulus & Kunci layar dari geser horizontal */
         html {
             scroll-behavior: smooth;
@@ -573,6 +647,17 @@
 </head>
 <body>
 
+    <!-- NOTIFIKASI PEMBELIAN (POPUP KIRI BAWAH) -->
+    <div id="sales-popup" class="sales-popup">
+        <div class="sp-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="sp-content">
+            <p id="sp-text"><strong>Adam</strong> baru saja order <strong>Paket Kontrak Desainer 1 Bulan</strong></p>
+            <span id="sp-time">10 menit yang lalu</span>
+        </div>
+    </div>
+
     <!-- TOP PROMO BANNER -->
     <div class="top-promo">
         <div class="container promo-wrapper">
@@ -1002,6 +1087,53 @@
             // Membuka WhatsApp di tab baru
             window.open(linkWhatsapp, '_blank');
         }
+    </script>
+    
+    <script>
+        // =========================================
+        // LOGIKA NOTIFIKASI PEMBELIAN BERGILIRAN
+        // =========================================
+        const dataPembelian = [
+            { name: "Adam", order: "Paket Kontrak Desainer 1 Bulan", time: "10 menit yang lalu" },
+            { name: "Rizky", order: "Paket Kelola Sosmed (Best Seller)", time: "25 menit yang lalu" },
+            { name: "Sarah", order: "Pembuatan Desain Logo Premium", time: "1 jam yang lalu" },
+            { name: "Budi", order: "Paket Feed Satuan (12 Feed)", time: "2 jam yang lalu" },
+            { name: "Citra", order: "Desain UI/UX Marketplace", time: "4 jam yang lalu" },
+            { name: "Fajar", order: "Desain Packaging Produk", time: "6 jam yang lalu" },
+            { name: "Melati", order: "Paket Branding Identitas", time: "Kemarin" }
+        ];
+
+        let indexNotif = 0;
+        const kotakNotif = document.getElementById('sales-popup');
+        const teksNotif = document.getElementById('sp-text');
+        const waktuNotif = document.getElementById('sp-time');
+
+        function munculkanNotif() {
+            // Ambil data sesuai urutan
+            const data = dataPembelian[indexNotif];
+            
+            // Ubah teks di HTML
+            teksNotif.innerHTML = `<strong>${data.name}</strong> baru saja order <strong>${data.order}</strong>`;
+            waktuNotif.innerText = data.time;
+
+            // Munculkan kotak (Slide In)
+            kotakNotif.classList.add('show');
+
+            // Tahan selama 5 detik, lalu sembunyikan (Slide Out)
+            setTimeout(() => {
+                kotakNotif.classList.remove('show');
+                
+                // Pindah ke nama berikutnya (jika sudah mentok ke-7, kembali ke 0)
+                indexNotif = (indexNotif + 1) % dataPembelian.length;
+                
+                // Tunggu 6 detik dalam keadaan kosong, lalu panggil fungsi ini lagi (Looping)
+                setTimeout(munculkanNotif, 6000);
+
+            }, 5000); // 5000ms = Notif tampil selama 5 detik
+        }
+
+        // Jalankan notifikasi pertama kali setelah pengunjung berada di web selama 3 detik
+        setTimeout(munculkanNotif, 3000);
     </script>
 </body>
 </html>
