@@ -617,7 +617,7 @@
                 scroll-snap-type: x mandatory; 
                 scroll-padding-left: 24px; 
                 margin: 0 -24px; 
-                padding: 10px 24px 40px 24px; 
+                padding: 30px 24px 40px 24px; 
                 gap: 16px; 
                 -webkit-overflow-scrolling: touch; 
                 scrollbar-width: none; 
@@ -642,7 +642,7 @@
             }
         }
 
-        /* =========================================
+      /* =========================================
            RUNNING TEXT (MARQUEE) - GLASS EFFECT
            ========================================= */
         .marquee-glass {
@@ -655,14 +655,16 @@
             overflow: hidden;
             position: relative;
             display: flex;
-            white-space: nowrap;
+            white-space: nowrap; /* Memaksa teks tidak turun ke bawah */
             z-index: 10;
-            margin-bottom: -50px; /* Agar menempel sempurna dengan section di bawahnya */
+            margin-bottom: -50px; 
         }
 
         .marquee-content {
             display: flex;
-            animation: scroll-text 30s linear infinite; /* 30s adalah kecepatan, semakin kecil semakin cepat */
+            flex-shrink: 0; /* Mencegah kotak menyusut */
+            align-items: center;
+            animation: scroll-text 30s linear infinite; 
         }
 
         .marquee-content span {
@@ -671,24 +673,22 @@
             color: var(--text-muted);
             letter-spacing: 1px;
             padding: 0 20px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
+            white-space: nowrap; /* Kunci utama agar teks tidak menumpuk */
         }
 
-        /* Titik pemisah antar kata */
         .marquee-content span::after {
             content: '•';
             margin-left: 40px;
             color: var(--primary-color);
         }
 
-        /* Animasi bergeser mulus ke kiri terus menerus */
         @keyframes scroll-text {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); } 
         }
 
-        /* Penyesuaian di layar HP */
         @media (max-width: 768px) {
             .marquee-glass { padding: 12px 0; }
             .marquee-content span { font-size: 0.95rem; }
