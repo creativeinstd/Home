@@ -549,6 +549,16 @@
         }
         
         @media (max-width: 768px) {
+
+            /* Memperbaiki Footer melebar di HP */
+            .footer-grid {
+                grid-template-columns: 1fr; /* Memaksa footer jadi 1 kolom ke bawah */
+                gap: 30px;
+                text-align: center; /* (Opsional) agar teks di footer rata tengah di HP */
+            }
+            .footer-col ul li { justify-content: center; } /* Rata tengah untuk list icon */
+            .socials { justify-content: center; } /* Rata tengah untuk icon sosmed */
+            
             .nav-links { 
                 position: absolute; 
                 top: 70px; 
