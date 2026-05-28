@@ -641,6 +641,58 @@
                 overflow-x: hidden !important;
             }
         }
+
+        /* =========================================
+           RUNNING TEXT (MARQUEE) - GLASS EFFECT
+           ========================================= */
+        .marquee-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            white-space: nowrap;
+            z-index: 10;
+            margin-bottom: -50px; /* Agar menempel sempurna dengan section di bawahnya */
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: scroll-text 30s linear infinite; /* 30s adalah kecepatan, semakin kecil semakin cepat */
+        }
+
+        .marquee-content span {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Titik pemisah antar kata */
+        .marquee-content span::after {
+            content: '•';
+            margin-left: 40px;
+            color: var(--primary-color);
+        }
+
+        /* Animasi bergeser mulus ke kiri terus menerus */
+        @keyframes scroll-text {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); } 
+        }
+
+        /* Penyesuaian di layar HP */
+        @media (max-width: 768px) {
+            .marquee-glass { padding: 12px 0; }
+            .marquee-content span { font-size: 0.95rem; }
+        }
     </style>
 </head>
 <body>
@@ -772,6 +824,32 @@
             </div>
         </div>
     </header>
+
+    <!-- RUNNING TEXT (MARQUEE) -->
+    <div class="marquee-glass reveal fade-up d-5">
+        <div class="marquee-content">
+            <!-- Teks Pertama -->
+            <span>Social Media Manage</span>
+            <span>Branding</span>
+            <span>Design Marketplace</span>
+            <span>Kontrak Desainer</span>
+            <span>Banner</span>
+            <span>Poster</span>
+            <span>Flyer</span>
+            <span>Custom Design</span>
+            <span>dll</span>
+            <!-- Teks Kedua (Diduplikat agar looping animasinya mulus tidak terputus) -->
+            <span>Social Media Manage</span>
+            <span>Branding</span>
+            <span>Design Marketplace</span>
+            <span>Kontrak Desainer</span>
+            <span>Banner</span>
+            <span>Poster</span>
+            <span>Flyer</span>
+            <span>Custom Design</span>
+            <span>dll</span>
+        </div>
+    </div>
 
     <!-- MENGAPA HARUS KAMI -->
     <section class="features section-padding">
