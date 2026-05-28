@@ -549,16 +549,6 @@
         }
         
         @media (max-width: 768px) {
-
-            /* Memperbaiki Footer melebar di HP */
-            .footer-grid {
-                grid-template-columns: 1fr; /* Memaksa footer jadi 1 kolom ke bawah */
-                gap: 30px;
-                text-align: center; /* (Opsional) agar teks di footer rata tengah di HP */
-            }
-            .footer-col ul li { justify-content: center; } /* Rata tengah untuk list icon */
-            .socials { justify-content: center; } /* Rata tengah untuk icon sosmed */
-            
             .nav-links { 
                 position: absolute; 
                 top: 70px; 
@@ -665,16 +655,14 @@
             overflow: hidden;
             position: relative;
             display: flex;
-            white-space: nowrap; /* Memaksa teks tidak turun ke bawah */
+            white-space: nowrap;
             z-index: 10;
-            margin-bottom: -50px; 
+            margin-bottom: 20px; /* Agar menempel sempurna dengan section di bawahnya */
         }
 
         .marquee-content {
             display: flex;
-            flex-shrink: 0; /* Mencegah kotak menyusut */
-            align-items: center;
-            animation: scroll-text 30s linear infinite; 
+            animation: scroll-text 30s linear infinite; /* 30s adalah kecepatan, semakin kecil semakin cepat */
         }
 
         .marquee-content span {
@@ -683,22 +671,24 @@
             color: var(--text-muted);
             letter-spacing: 1px;
             padding: 0 20px;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            white-space: nowrap; /* Kunci utama agar teks tidak menumpuk */
         }
 
+        /* Titik pemisah antar kata */
         .marquee-content span::after {
             content: '•';
             margin-left: 40px;
             color: var(--primary-color);
         }
 
+        /* Animasi bergeser mulus ke kiri terus menerus */
         @keyframes scroll-text {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); } 
         }
 
+        /* Penyesuaian di layar HP */
         @media (max-width: 768px) {
             .marquee-glass { padding: 12px 0; }
             .marquee-content span { font-size: 0.95rem; }
